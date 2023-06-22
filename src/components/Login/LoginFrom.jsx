@@ -30,7 +30,7 @@ const Login = () => {
       }
 
       try {
-        const UserRes = await axios.post("http://localhost:4000/login", userData);
+        const UserRes = await axios.post("https://jupinote-main-server.onrender.com/login", userData);
         console.log(UserRes);
         setCookie("authToken", UserRes.data.authToken);
         setCookie("username", UserRes.data.userData.username);

@@ -60,7 +60,7 @@ const Card = () => {
 
     const fetchNotes = () => {
         let userId = getCookies("username");
-        axios.get(`http://localhost:4000/v1/notes/all/${userId}`)
+        axios.get(`https://jupinote-main-server.onrender.com/v1/notes/all/${userId}`)
             .then((res) => {
                 res.data.allNotes <= 0 ? setIsEmpty(true) : setIsEmpty(false);
                 setNotes(res.data.allNotes)

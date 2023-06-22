@@ -17,7 +17,7 @@ const Edit = () => {
     const fetchApi = async () => {
         const username = getCookies("username")
         console.log(username);
-        const { data } = await axios.post("http://localhost:4000/user/validation", { "username": username });
+        const { data } = await axios.post("https://jupinote-main-server.onrender.com/user/validation", { "username": username });
         setEmail(data.userData.email);
         setNewEmail(data.userData.email)
     }
@@ -42,7 +42,7 @@ const Edit = () => {
             "password": password
         }
 
-        const userData = await axios.post("http://localhost:4000/user/updateUser",data);
+        const userData = await axios.post("https://jupinote-main-server.onrender.com/user/updateUser",data);
         const errorCode = userData.data.error;
         if (errorCode === "10001"){
             setLoading(!true);

@@ -56,7 +56,7 @@ const Editnotes = () => {
         }
 
         try {
-            await axios.post("http://localhost:4000/v1/notes/update", noteData);
+            await axios.post("https://jupinote-main-server.onrender.com/v1/notes/update", noteData);
             toast.success("Note Updated");
             setTimeout(() => {
                 nav("/user/notes");

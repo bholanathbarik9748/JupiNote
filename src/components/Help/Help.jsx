@@ -26,7 +26,7 @@ const Help = () => {
             "username": username,
             "message": userHelp
         }
-        await axios.post("http://localhost:4000/v1/help", data);
+        await axios.post("https://jupinote-main-server.onrender.com/v1/help", data);
         toast.success("We value your feedback and are committed to making improvements based on your input.");
         setTimeout(() => {
             _nav("/user/notes");

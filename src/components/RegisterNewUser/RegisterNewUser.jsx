@@ -34,7 +34,7 @@ const RegisterNewUser = () => {
             }
 
             try {
-                const UserRes = await axios.post("http://localhost:4000/registerNewUser", userData);
+                const UserRes = await axios.post("https://jupinote-main-server.onrender.com/registerNewUser", userData);
                 console.log(UserRes);
                 setCookie("authToken",UserRes.data.authToken);
                 setCookie("username", UserRes.data.userData.username);

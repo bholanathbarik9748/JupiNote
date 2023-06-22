@@ -60,7 +60,7 @@ const Bincards = () => {
 
     const fetchNotes = () => {
         let userId = getCookies("username");
-        axios.get(`http://localhost:4000/v1/delete/notes/all/${userId}`)
+        axios.get(`https://jupinote-main-server.onrender.com/v1/delete/notes/all/${userId}`)
             .then((res) => {
                 res.data.allNotes <= 0 ? setIsEmpty(true) : setIsEmpty(false);
                 setNotes(res.data.allNotes)
@@ -69,7 +69,7 @@ const Bincards = () => {
     }
 
     const restoreNotes = (_id) => {
-        axios.patch(`http://localhost:4000/v1/restore/notes/${_id}`)
+        axios.patch(`https://jupinote-main-server.onrender.com/v1/restore/notes/${_id}`)
         .then((res) => {
             toast.success("Note restore successful");
             fetchNotes();

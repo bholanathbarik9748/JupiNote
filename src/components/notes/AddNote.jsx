@@ -48,7 +48,7 @@ const AddNote = () => {
 
         const username = getCookie("username");
         const AuthToken = getCookie("authToken");
-        const isAuthUser = await axios.post("http://localhost:4000/user/validation", { username });
+        const isAuthUser = await axios.post("https://jupinote-main-server.onrender.com/user/validation", { username });
         if (!isValidString(isAuthUser) || username.length <= 0 || AuthToken <= 0) {
             toast.error("Session expired. Please log in again.");
             return false;
@@ -62,7 +62,7 @@ const AddNote = () => {
             url: url
         }
         try {
-            const uploadNotes = await axios.post("http://localhost:4000/v1/notes/new", noteData);
+            const uploadNotes = await axios.post("https://jupinote-main-server.onrender.com/v1/notes/new", noteData);
             toast.success("New Note added");
             console.log(uploadNotes);
             setTimeout(() => {

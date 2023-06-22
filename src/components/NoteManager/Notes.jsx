@@ -16,7 +16,7 @@ const Notes = () => {
     const nav = useNavigate();
 
     const deleteHandler = async () => {
-        await axios.patch(`http://localhost:4000/v1/notes/${id}`);
+        await axios.patch(`https://jupinote-main-server.onrender.com/v1/notes/${id}`);
         nav("/user/notes");
     }
 
