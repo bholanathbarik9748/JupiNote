@@ -11,7 +11,10 @@ const ProtectedRoute = lazy(() => import('./protectedRoute/Home/ProtectedRoute')
 const AddNewNote = lazy(() => import('./pages/addNote/AddNote'));
 const ReadNote = lazy(() => import('./pages/ReadNote/ReadNote'));
 const EditNote = lazy(() => import('./pages/EditNotes/EditNotes'));
+const AboutUs = lazy(() => import('./pages/AboutUs/About_Us'));
 const Bin = lazy(() => import('./pages/Bin/Bin'));
+const Help = lazy(() => import('./pages/Help/Help'));
+
 
 function App() {
   return (
@@ -27,6 +30,8 @@ function App() {
             <Route path="/user/new/note" element={<AddNewNote />} />
             <Route path="/user/read-note" element={<ReadNote />} />
             <Route path="/user/edit-note" element={<EditNote />} />
+            <Route path="/user/about-us" element={<AboutUs />} />
+            <Route path="/help" element={<Help />} />
             <Route path="/user/bin" element={<Bin />} />
           </Route>
         </Routes>

@@ -27,6 +27,9 @@ const navbar = () => {
                         <span className="text-amber-700 topHeadName ml-3 text-xl font-family:Roboto Slab, serif">JupiNote</span>
                     </Link>
                     <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
+                        <Link className="text-black mr-5" to="/help">
+                            Help
+                        </Link>
                         <Link to="/user/info">
                             <img className="rounded w-8 cursor-pointer" alt="hero" src={userIcon} />
                         </Link>
