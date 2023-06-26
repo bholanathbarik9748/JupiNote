@@ -5,11 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import { isWebUri } from 'valid-url';
 import axios from 'axios';
 
-const id = localStorage.getItem("readNoteID");
-let title = localStorage.getItem("readNoteTitle");
-let topic = localStorage.getItem("readNoteTopic");
-let body = localStorage.getItem("readNoteBody");
-let url = localStorage.getItem("readNoteUrl");
 
 const isValidString = (text) => {
     return text !== "" && text !== undefined;
@@ -17,6 +12,11 @@ const isValidString = (text) => {
 
 const Editnotes = () => {
     const [uploading, setUploading] = useState(false);
+    const id = localStorage.getItem("readNoteID");
+    let title = localStorage.getItem("readNoteTitle");
+    let topic = localStorage.getItem("readNoteTopic");
+    let body = localStorage.getItem("readNoteBody");
+    let url = localStorage.getItem("readNoteUrl");
     const nav = useNavigate();
 
     const SubmitHandler = async (e) => {
@@ -58,6 +58,11 @@ const Editnotes = () => {
         try {
             await axios.post("https://jupinote-main-server.onrender.com/v1/notes/update", noteData);
             toast.success("Note Updated");
+            localStorage.removeItem("readNoteID");
+            localStorage.removeItem("readNoteTitle");
+            localStorage.removeItem("readNoteTopic");
+            localStorage.removeItem("readNoteBody");
+            localStorage.removeItem("readNoteUrl");
             setTimeout(() => {
                 nav("/user/notes");
                 setUploading(!true);
