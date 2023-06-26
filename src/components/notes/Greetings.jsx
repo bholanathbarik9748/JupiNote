@@ -1,27 +1,20 @@
 import React from 'react'
 import getCookies from '../../hooks/Cookie/getCookie';
-import { AiFillPlusCircle } from "react-icons/ai";
 import { FcFullTrash, FcPlus } from "react-icons/fc";
 import { Link } from 'react-router-dom';
 
 const Greetings = () => {
     const greetingsOnTimeZone = () => {
-        var hour = new Date().getHours();
-        var minute = new Date().getMinutes();
-        if (hour >= 0 && hour < 12)
-            return 'Good Morning!';
-        else if (hour == 12 && minute == 0)
-            return 'Good Morning!';
-        else if (hour == 12 && minute > 0)
-            return 'Good Afternoon!';
-        else if (hour == 6 && minute == 0)
-            return 'Good Afternoon!';
-        else if (hour == 6 && minute > 0)
-            return 'Good Evening!';
-        else if (hour > 12 && hour < 6)
-            return 'Good Afternoon!';
-        else if (hour > 6 && hour < 12)
-            return 'Good Evening';
+        const currentTime = new Date();
+        if (currentTime.getHours() < 3 && currentTime.getHours() < 12) {
+            return "Good morning! Wishing you a day filled with joy, laughter, and endless possibilities.";
+        } else if (currentTime.getHours() < 16) {
+            return "Good afternoon! I hope your day has been productive and fulfilling so far.";
+        } else if (currentTime.getHours() < 20){
+            return "Good evening! May this peaceful time of day bring you relaxation and serenity.";
+        }else {
+            return "Good night! May this peaceful night of day bring you relaxation and beautiful dreams.";
+        }
     }
 
     return (
