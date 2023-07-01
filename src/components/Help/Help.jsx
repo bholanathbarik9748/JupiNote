@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import api from '../../../api';
 
 const Help = () => {
     const [username, setUsername] = useState("");
@@ -26,7 +27,7 @@ const Help = () => {
             "username": username,
             "message": userHelp
         }
-        await axios.post("https://jupinote-main-server.onrender.com/v1/help", data);
+        await axios.post(`${api}/v1/help`, data);
         toast.success("We value your feedback and are committed to making improvements based on your input.");
         setTimeout(() => {
             _nav("/user/notes");

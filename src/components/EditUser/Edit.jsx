@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import getCookies from '../../hooks/Cookie/getCookie';
 import validator from 'validator'
 import { useNavigate } from 'react-router-dom';
+import api from '../../../api';
 
 const Edit = () => {
     const [email, setEmail] = useState("");
@@ -17,7 +18,7 @@ const Edit = () => {
     const fetchApi = async () => {
         const username = getCookies("username")
         console.log(username);
-        const { data } = await axios.post("https://jupinote-main-server.onrender.com/user/validation", { "username": username });
+        const { data } = await axios.post(`${api}/user/validation`, { "username": username });
         setEmail(data.userData.email);
         setNewEmail(data.userData.email)
     }
@@ -42,7 +43,7 @@ const Edit = () => {
             "password": password
         }
 
-        const userData = await axios.post("https://jupinote-main-server.onrender.com/user/updateUser",data);
+        const userData = await axios.post(`${api}/user/updateUser`,data);
         const errorCode = userData.data.error;
         if (errorCode === "10001"){
             setLoading(!true);
@@ -92,7 +93,7 @@ const Edit = () => {
                 !loading ?  
                 <button onClick={SubmitHandler} type="submit" className="text-white bg-amber-500 hover:bg-amber-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-amber-500 dark:hover:bg-amber-700 dark:focus:ring-amber-700">Submit</button>
                 :
-                <button disabled={true} type="submit" className="text-white bg-amber-500 hover:bg-amber-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-amber-500 dark:hover:bg-amber-700 dark:focus:ring-amber-700">Please Wait</button>
+                <button disabled={true} type="submit" className="text-white bg-amber-500 hover:bg-amber-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-amber-500 dark:hover:bg-amber-700 dark:focus:ring-amber-700">Please Wait...</button>
             }
         </form>
     )

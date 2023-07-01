@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import ContentLoader from "react-content-loader"
 import { FcGrid, FcList } from "react-icons/fc";
+import api from '../../../api';
 
 const OneLoader = (props) => (
     <ContentLoader
@@ -57,12 +58,12 @@ const MyLoader = () => {
 const Card = () => {
     const [note, setNotes] = useState([[]]);
     const [isEmpty, setIsEmpty] = useState(true);
-    const [isGrid,setGrid] = useState(true); 
+    const [isGrid, setGrid] = useState(true);
     const _nav = useNavigate();
 
     const fetchNotes = () => {
         let userId = getCookies("username");
-        axios.get(`https://jupinote-main-server.onrender.com/v1/notes/all/${userId}`)
+        axios.get(`${api}/v1/notes/all/${userId}`)
             .then((res) => {
                 res.data.allNotes <= 0 ? setIsEmpty(true) : setIsEmpty(false);
                 setNotes(res.data.allNotes)
@@ -89,18 +90,22 @@ const Card = () => {
         <>
 
             <section className="text-gray-600 body-font" >
-                <div className="container mx-auto">
-                    <div className="flex mb-2 md:ml-auto md:mr-0 items-center flex-shrink-0 space-x-2">
-                        <button onClick={() => setGrid(!isGrid)} disabled={isGrid}  className="bg-gray-100 inline-flex py-2 px-2 rounded-lg items-center hover:bg-gray-200 focus:outline-none disabled:bg-black">
-                            <FcGrid />
-                        </button>
-                        <button onClick={() => setGrid(!isGrid)} disabled={!isGrid} className="bg-gray-100 inline-flex py-2 px-2 rounded-lg items-center hover:bg-gray-200 focus:outline-none disabled:bg-black">
-                            <FcList />
-                        </button>
-                    </div>
-
+                <div className="container mx-auto mb-4">
                     {
-                        isGrid ? 
+                        !isEmpty ?
+                            <div className="flex mb-2 md:ml-auto md:mr-0 items-center flex-shrink-0 space-x-2">
+                                <button onClick={() => setGrid(!isGrid)} disabled={isGrid} className="bg-gray-100 inline-flex py-2 px-2 rounded-lg items-center hover:bg-gray-200 focus:outline-none disabled:bg-black">
+                                    <FcGrid />
+                                </button>
+                                <button onClick={() => setGrid(!isGrid)} disabled={!isGrid} className="bg-gray-100 inline-flex py-2 px-2 rounded-lg items-center hover:bg-gray-200 focus:outline-none disabled:bg-black">
+                                    <FcList />
+                                </button>
+                            </div>
+                            :
+                            ""
+                    }
+                    {
+                        isGrid ?
                             <div className="flex flex-wrap -m-4">
                                 {note.length === 0 ? "0 Notes Found" :
                                     isEmpty ? <MyLoader /> : note.map((ele) => (
@@ -126,32 +131,32 @@ const Card = () => {
                                     ))
                                 }
                             </div>
-                        : 
-                        <div className="-m-1">
-                        {note.length === 0 ? "0 Notes Found" :
-                            isEmpty ? <MyLoader /> : note.map((ele) => (
-                                <div className="p-2" key={ele._id}>
-                                    <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-                                        <div className="p-2" >
-                                            <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">{ele.topic}</h2>
-                                            <h1 className="title-font text-lg font-medium text-gray-900 mb-3">{ele.title}</h1>
-                                            <p className="leading-relaxed mb-3 text-justify">{ele.body.substring(0, 100) + "...."}</p>
-                                            <button onClick={() => ReadMoreHandler(ele._id, ele.title, ele.topic, ele.created_at, ele.body, ele.url, ele.updated_at)}>
-                                                <div className="flex items-center flex-wrap">
-                                                    <a className="text-amber-500 inline-flex items-center md:mb-2 lg:mb-0 cursor-pointer">Read More
-                                                        <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round">
-                                                            <path d="M5 12h14"></path>
-                                                            <path d="M12 5l7 7-7 7"></path>
-                                                        </svg>
-                                                    </a>
+                            :
+                            <div className="-m-1">
+                                {note.length === 0 ? "0 Notes Found" :
+                                    isEmpty ? <MyLoader /> : note.map((ele) => (
+                                        <div className="p-2" key={ele._id}>
+                                            <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                                                <div className="p-2" >
+                                                    <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">{ele.topic}</h2>
+                                                    <h1 className="title-font text-lg font-medium text-gray-900 mb-3">{ele.title}</h1>
+                                                    <p className="leading-relaxed mb-3 text-justify">{ele.body.substring(0, 100) + "...."}</p>
+                                                    <button onClick={() => ReadMoreHandler(ele._id, ele.title, ele.topic, ele.created_at, ele.body, ele.url, ele.updated_at)}>
+                                                        <div className="flex items-center flex-wrap">
+                                                            <a className="text-amber-500 inline-flex items-center md:mb-2 lg:mb-0 cursor-pointer">Read More
+                                                                <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round">
+                                                                    <path d="M5 12h14"></path>
+                                                                    <path d="M12 5l7 7-7 7"></path>
+                                                                </svg>
+                                                            </a>
+                                                        </div>
+                                                    </button>
                                                 </div>
-                                            </button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            ))
-                        }
-                    </div>
+                                    ))
+                                }
+                            </div>
                     }
                 </div>
             </section>

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import setCookie from '../../hooks/Cookie/setCookie';
+import api from '../../../api';
 
 
 const ValidationCheck = (userId, Email, Password) => {
@@ -34,7 +35,7 @@ const RegisterNewUser = () => {
             }
 
             try {
-                const UserRes = await axios.post("https://jupinote-main-server.onrender.com/registerNewUser", userData);
+                const UserRes = await axios.post(`${api}/registerNewUser`, userData);
                 console.log(UserRes);
                 setCookie("authToken",UserRes.data.authToken);
                 setCookie("username", UserRes.data.userData.username);
@@ -82,7 +83,7 @@ const RegisterNewUser = () => {
                 </div>
                 {
                     validating ?
-                        <button className="submit text-white bg-gray-500 border-0 py-2 px-6 focus:outline-none rounded text-lg">please wait..</button>
+                        <button className="submit text-white bg-gray-500 border-0 py-2 px-6 focus:outline-none rounded text-lg">please wait...</button>
                         :
                         <button onClick={SubmitReq} className="submit text-white bg-amber-600 border-0 py-2 px-6 focus:outline-none hover:bg-amber-800 rounded text-lg" style={{ cursor: "pointer" }}>Next</button>
                 }

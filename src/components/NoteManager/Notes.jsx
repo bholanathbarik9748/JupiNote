@@ -4,6 +4,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import api from '../../../api';
 
 const Notes = () => {
     const id = localStorage.getItem("readNoteID");
@@ -16,7 +17,7 @@ const Notes = () => {
     const nav = useNavigate();
 
     const deleteHandler = async () => {
-        await axios.patch(`https://jupinote-main-server.onrender.com/v1/notes/${id}`);
+        await axios.patch(`${api}/v1/notes/${id}`);
         nav("/user/notes");
     }
 

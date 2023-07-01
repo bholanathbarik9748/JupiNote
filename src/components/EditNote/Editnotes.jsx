@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import { isWebUri } from 'valid-url';
 import axios from 'axios';
-
+import api from '../../../api';
 
 const isValidString = (text) => {
     return text !== "" && text !== undefined;
@@ -56,7 +56,7 @@ const Editnotes = () => {
         }
 
         try {
-            await axios.post("https://jupinote-main-server.onrender.com/v1/notes/update", noteData);
+            await axios.post(`${api}/v1/notes/update`, noteData);
             toast.success("Note Updated");
             localStorage.removeItem("readNoteID");
             localStorage.removeItem("readNoteTitle");

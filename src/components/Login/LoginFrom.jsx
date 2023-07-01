@@ -5,6 +5,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import setCookie from '../../hooks/Cookie/setCookie';
+import api from '../../../api';
 
 const ValidationCheck = (Email, Password) => {
   if (Email === "" || Email === undefined) { toast.error("please enter Email"); return false; }
@@ -30,7 +31,7 @@ const Login = () => {
       }
 
       try {
-        const UserRes = await axios.post("https://jupinote-main-server.onrender.com/login", userData);
+        const UserRes = await axios.post(`${api}/login`, userData);
         console.log(UserRes);
         setCookie("authToken", UserRes.data.authToken);
         setCookie("username", UserRes.data.userData.username);

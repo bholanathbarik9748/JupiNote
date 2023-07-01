@@ -4,6 +4,7 @@ import axios from 'axios';
 import ContentLoader from "react-content-loader";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import api from '../../../api';
 
 const OneLoader = (props) => (
     <ContentLoader
@@ -60,7 +61,7 @@ const Bincards = () => {
 
     const fetchNotes = () => {
         let userId = getCookies("username");
-        axios.get(`https://jupinote-main-server.onrender.com/v1/delete/notes/all/${userId}`)
+        axios.get(`${api}/v1/delete/notes/all/${userId}`)
             .then((res) => {
                 res.data.allNotes <= 0 ? setIsEmpty(true) : setIsEmpty(false);
                 setNotes(res.data.allNotes)
@@ -69,13 +70,22 @@ const Bincards = () => {
     }
 
     const restoreNotes = (_id) => {
-        axios.patch(`https://jupinote-main-server.onrender.com/v1/restore/notes/${_id}`)
+        axios.patch(`${api}/v1/restore/notes/${_id}`)
         .then((res) => {
             toast.success("Note restore successful");
             fetchNotes();
         })
         .catch((err) => toast.success("something went wrong please try again after sometime"))
     }
+
+    const deletePermanently = (_id) => {
+        axios.patch(`${api}/v1/delete/notes/${_id}`)
+            .then((res) => {
+                toast.success("Note deleted successful");
+                fetchNotes();
+            })
+            .catch((err) => toast.error("something went wrong please try again after sometime"))
+    } 
 
     useEffect(() => {
         fetchNotes();
@@ -105,7 +115,8 @@ const Bincards = () => {
                                             <p className="leading-relaxed mb-3 text-justify">{ele.body.substring(0, 100) + "...."}</p>
                                             <button>
                                                 <div className="flex items-center flex-wrap">
-                                                    <a onClick={() => restoreNotes(ele._id)} className="text-amber-500 inline-flex items-center md:mb-2 lg:mb-0 cursor-pointer">Restore</a>
+                                                    <a onClick={() => restoreNotes(ele._id)} className="text-amber-500 inline-flex items-center md:mb-2 lg:mb-0 mr-10 cursor-pointer">Restore</a>
+                                                    <a onClick={() => deletePermanently(ele._id)} className="text-amber-500 inline-flex items-center md:mb-2 lg:mb-0 cursor-pointer">Delete forever</a>
                                                 </div>
                                             </button>
                                         </div>
