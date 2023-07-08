@@ -4,26 +4,12 @@ import { FcFullTrash, FcPlus } from "react-icons/fc";
 import { Link } from 'react-router-dom';
 
 const Greetings = () => {
-    const greetingsOnTimeZone = () => {
-        const currentTime = new Date();
-        if (currentTime.getHours() < 3 && currentTime.getHours() < 12) {
-            return "Good morning! Wishing you a day filled with joy, laughter, and endless possibilities.";
-        } else if (currentTime.getHours() < 16) {
-            return "Good afternoon! I hope your day has been productive and fulfilling so far.";
-        } else if (currentTime.getHours() < 20){
-            return "Good evening! May this peaceful time of day bring you relaxation and serenity.";
-        }else {
-            return "Good night! May this peaceful night of day bring you relaxation and beautiful dreams.";
-        }
-    }
-
     return (
         <>
             <section className="text-gray-600 body-font my-10 mx-10">
                 <div className="container mx-auto flex items-center md:flex-row flex-col">
                     <div className="flex flex-col md:pr-10 md:mb-0 mb-6 pr-0 w-full md:w-auto md:text-left text-center">
-                        <h2 className="text-xs text-amber-500 tracking-widest font-medium title-font mb-1">{greetingsOnTimeZone()}</h2>
-                        <h1 className="md:text-3xl text-l font-medium title-font text-gray-900">{getCookies("username")}</h1>
+                        <h1 className="md:text-3xl text-l font-medium title-font text-gray-900">Hi {getCookies("username")}</h1>
                     </div>
                     <div className="flex md:ml-auto md:mr-0 mx-auto items-center flex-shrink-0 space-x-4">
                         <Link to="/user/bin">
