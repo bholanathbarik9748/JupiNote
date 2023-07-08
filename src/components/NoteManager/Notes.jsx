@@ -33,11 +33,11 @@ const Notes = () => {
                     <div className="flex flex-col text-center w-full mb-12">
                         <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-amber-400">{title}</h1>
                         <div className="flex flex-row justify-center">
-                            <h1 className="sm:text-3 font-small mx-2 my-2 title-font mb-4 text-gray-400">{topic}</h1>
+                            <h1 className="sm:text-3 font-small mx-2 my-2 title-font mb-4 text-gray-400"><b>Topic</b> : {topic}</h1>
                             <h1 className="sm:text-3 font-small mx-2 my-2 title-font mb-4 text-gray-400"><b>Publish</b> : {date}</h1>
                             <h1 className="sm:text-3 font-small mx-2 my-2 title-font mb-4 text-gray-400"><b>Update</b> : {update}</h1>
                         </div>
-                        <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-center">{body}</p>
+                        <textarea value={body} disabled={true} type="text" id="body" className="bg-gray-300 border border-amber-500  text-gray-900 text-sm rounded-md focus:ring-amber-500 focus:border-amber-500 block h-96 p-2.5 mt-5 ml-28 mr-28" />
                     </div>
                     <div className="flex flex-row justify-center">
                         <button onClick={EditHandler}  className="btn_text flex mx-2 my-2 text-white bg-indigo-700 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-500 rounded text-lg">Edit</button>

@@ -65,7 +65,6 @@ const AddNote = () => {
         try {
             const uploadNotes = await axios.post(`${api}/v1/notes/new`, noteData);
             toast.success("New Note added");
-            console.log(uploadNotes);
             setTimeout(() => {
                 nav("/user/notes");
                 setUploading(!true);

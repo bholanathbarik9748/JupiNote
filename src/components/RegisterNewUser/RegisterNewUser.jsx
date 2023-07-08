@@ -36,7 +36,6 @@ const RegisterNewUser = () => {
 
             try {
                 const UserRes = await axios.post(`${api}/registerNewUser`, userData);
-                console.log(UserRes);
                 setCookie("authToken",UserRes.data.authToken);
                 setCookie("username", UserRes.data.userData.username);
                 if (UserRes.data.success === true) {
